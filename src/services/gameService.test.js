@@ -28,8 +28,8 @@ describe("Game service", () => {
     expect(deck.length).toEqual(currentLenth - nbCard)
   })
 
-  test("should put camels from hand to herd", () => {
-    let game = {
+  test("should put camels from hand to herd 1/0", () => {
+    const game = {
       _players: [
         { hand: ["camel", "diamonds"], camelsCount: 0 },
         { hand: ["gold", "cloth"], camelsCount: 0 },
@@ -43,8 +43,9 @@ describe("Game service", () => {
     expect(game._players[1].hand.length).toBe(2)
     expect(game._players[1].hand).toStrictEqual(["gold", "cloth"])
     expect(game._players[1].camelsCount).toBe(0)
-
-    game = {
+  })
+  test("should put camels from hand to herd 1/1", () => {
+    const game = {
       _players: [
         { hand: ["camel", "diamonds"], camelsCount: 0 },
         { hand: ["camel", "cloth"], camelsCount: 0 },
@@ -58,8 +59,9 @@ describe("Game service", () => {
     expect(game._players[1].hand.length).toBe(1)
     expect(game._players[1].hand).toStrictEqual(["cloth"])
     expect(game._players[1].camelsCount).toBe(1)
-
-    game = {
+  })
+  test("should put camels from hand to herd 0/0", () => {
+    const game = {
       _players: [
         { hand: ["cloth", "diamonds"], camelsCount: 0 },
         { hand: ["cloth", "cloth"], camelsCount: 0 },
@@ -73,8 +75,9 @@ describe("Game service", () => {
     expect(game._players[1].hand.length).toBe(2)
     expect(game._players[1].hand).toStrictEqual(["cloth", "cloth"])
     expect(game._players[1].camelsCount).toBe(0)
-
-    game = {
+  })
+  test("should put camels from hand to herd 0/1", () => {
+    const game = {
       _players: [
         { hand: ["diamonds", "diamonds"], camelsCount: 0 },
         { hand: ["camel", "cloth"], camelsCount: 0 },
