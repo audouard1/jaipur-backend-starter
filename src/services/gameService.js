@@ -68,3 +68,8 @@ export function createGame(name) {
   databaseService.saveGame(game)
   return game
 }
+
+export function takeGood(game) {
+
+  return game
+}
