@@ -68,11 +68,17 @@ export function createGame(name) {
   databaseService.saveGame(game)
   return game
 }
-
-export function takeGood(id) {
-  const game = databaseService.findGame()
-
-  
+/*
+export function takeGood(id, playerIndex, good) {
+  const game = databaseService.findGame(id)
+  console.log(game)
+  if (playerIndex===game.currentPlayerIndex) {
+    if (game._players.hand.length <7){
+        if (game.market.filter(g => g == good)[0] == good) {
+        }
+    }
+  }
 
   return game
 }
+*/

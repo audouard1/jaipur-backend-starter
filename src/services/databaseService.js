@@ -32,6 +32,6 @@ export function saveGame(game) {
 }
 
 export function findGame(id) {
-const game = getGames().filter( game => game.id==id)
-return game[0]
+  const game = getGames().filter( game => game.id==id)
+  return game[0]
 }

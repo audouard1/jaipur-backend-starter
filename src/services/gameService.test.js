@@ -1,4 +1,10 @@
 import * as gameService from "./gameService"
+import fs from "fs"
+
+jest.mock("fs")
+afterEach(() => {
+  jest.clearAllMocks()
+})
 
 describe("Game service", () => {
   test("should init a deck", () => {
@@ -92,4 +98,75 @@ describe("Game service", () => {
     expect(game._players[1].hand).toStrictEqual(["cloth"])
     expect(game._players[1].camelsCount).toBe(1)
   })
+
+  /*
+  test("En tant que joueur, je peux prendre 1 seule marchandise", () => {
+    fs.readFileSync.mockImplementation(() => `[
+      {
+        id: 1,
+        name: "test",
+        market: ["camel", "camel", "camel", "diamonds", "diamonds"],
+        _deck: [
+          "silver",
+          "silver",
+          "silver",
+          "silver",
+          "silver",
+          "silver",
+          "cloth",
+          "cloth",
+          "cloth",
+          "cloth",
+          "cloth",
+          "cloth",
+          "cloth",
+          "cloth",
+          "spice",
+          "spice",
+          "spice",
+          "spice",
+          "spice",
+          "spice",
+          "spice",
+          "spice",
+          "leather",
+          "leather",
+          "leather", "leather", "leather", "leather", "leather", "leather", "leather", "leather",
+          "camel", "camel", "camel", "camel", "camel", "camel", "camel", "camel",
+        ],
+        _players: [
+          {
+            hand: ["diamonds", "diamonds", "diamonds", "diamonds", "gold"],
+            camelsCount: 0,
+            score: 0,
+          },
+          {
+            hand: ["gold", "gold", "gold", "gold", "gold"],
+            camelsCount: 0,
+            score: 0,
+          },
+        ],
+        currentPlayerIndex: 0,
+        tokens: {
+          diamonds: [7, 7, 5, 5, 5],
+          gold: [6, 6, 5, 5, 5],
+          silver: [5, 5, 5, 5, 5],
+          cloth: [5, 3, 3, 2, 2, 1, 1],
+          spice: [5, 3, 3, 2, 2, 1, 1],
+          leather: [4, 3, 2, 1, 1, 1, 1, 1, 1],
+        },
+        _bonusTokens: {
+          3: [2, 1, 2, 3, 1, 2, 3],
+          4: [4, 6, 6, 4, 5, 5],
+          5: [8, 10, 9, 8, 10],
+        },
+        isDone: false,
+      })
+    }
+    ]`)
+
+    const game = gameService.takeGood(1, 0, "diamonds")
+    console.log(game)
+    expect(game.market.length).toBe(4)
+  }) */
 })
