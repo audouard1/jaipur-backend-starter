@@ -7,6 +7,9 @@ jest.mock("lodash")
 lodash.shuffle.mockImplementation((x) => x)
 // Prevent database service to write tests game to filesystem
 jest.mock("fs")
+afterEach(() => {
+  jest.clearAllMocks()
+})
 
 // TODO: Prevent shuffle for tests
 
@@ -96,10 +99,27 @@ describe("Game router", () => {
     expect(response.statusCode).toBe(400)
   })
   test("should get all games", async () => {
-    let response = await await request(app).get("/games")
+    let response = await request(app).get("/games")
     expect(response.body.length).toEqual(0)
     fs.readFileSync.mockImplementation(() => `[{"id": 1}, {"id": 1}]`)
-    response = await await request(app).get("/games")
+    response = await request(app).get("/games")
     expect(response.body.length).toEqual(2)
+  })
+  test("should get game by id and get 200", async () => {
+    fs.readFileSync.mockImplementation(
+      () =>
+        `[{"id":1,"name":"dolore est","market":["camel","camel","camel","leather","cloth"],"_deck":["leather","spice","silver","diamonds","spice","silver","cloth","leather","spice","cloth","leather","silver","spice","leather","gold","camel","camel","gold","spice","diamonds","leather","camel","gold","gold","diamonds","spice","leather","camel","cloth","silver","spice","leather","camel","gold","gold","diamonds","silver","spice","cloth","diamonds"],"_players":[{"hand":["cloth","diamonds","cloth","silver","cloth"],"camelsCount":0,"score":0},{"hand":["leather","leather"],"camelsCount":3,"score":0}],"currentPlayerIndex":0,"tokens":{"diamonds":[7,7,5,5,5],"gold":[6,6,5,5,5],"silver":[5,5,5,5,5],"cloth":[5,3,3,2,2,1,1],"spice":[5,3,3,2,2,1,1],"leather":[4,3,2,1,1,1,1,1,1]},"_bonusTokens":{"3":[2,1,2,3,3,1,2],"4":[6,5,4,4,6,5],"5":[10,10,8,8,9]},"isDone":false}]`
+    )
+    const response = await request(app).get("/games/1")
+    expect(response.statusCode).toEqual(200)
+    expect(response.body === undefined).toEqual(false)
+  })
+  test("should get game by id and get 404", async () => {
+    fs.readFileSync.mockImplementation(
+      () =>
+        `[{"id":1,"name":"dolore est","market":["camel","camel","camel","leather","cloth"],"_deck":["leather","spice","silver","diamonds","spice","silver","cloth","leather","spice","cloth","leather","silver","spice","leather","gold","camel","camel","gold","spice","diamonds","leather","camel","gold","gold","diamonds","spice","leather","camel","cloth","silver","spice","leather","camel","gold","gold","diamonds","silver","spice","cloth","diamonds"],"_players":[{"hand":["cloth","diamonds","cloth","silver","cloth"],"camelsCount":0,"score":0},{"hand":["leather","leather"],"camelsCount":3,"score":0}],"currentPlayerIndex":0,"tokens":{"diamonds":[7,7,5,5,5],"gold":[6,6,5,5,5],"silver":[5,5,5,5,5],"cloth":[5,3,3,2,2,1,1],"spice":[5,3,3,2,2,1,1],"leather":[4,3,2,1,1,1,1,1,1]},"_bonusTokens":{"3":[2,1,2,3,3,1,2],"4":[6,5,4,4,6,5],"5":[10,10,8,8,9]},"isDone":false}]`
+    )
+    const response = await request(app).get("/games/7")
+    expect(response.statusCode).toEqual(404)
   })
 })

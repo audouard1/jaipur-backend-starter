@@ -17,4 +17,12 @@ router.get("/", function (req, res) {
   res.status(200).json(games)
 })
 
+router.get("/:id", function (req, res) {
+  const game = gameService.getGamesForId(parseInt(req.params.id))
+  if (game === undefined) {
+    return res.status(404).send("Not found")
+  }
+  res.status(200).json(game)
+})
+
 export default router

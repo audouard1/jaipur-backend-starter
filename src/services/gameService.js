@@ -81,3 +81,16 @@ export function getAllGames() {
   })
   return games
 }
+
+export function getGamesForId(id) {
+  const games = databaseService.getGames()
+  const res = []
+  games.forEach((g) => {
+    res.push(
+      Object.fromEntries(
+        Object.entries(g).filter(([key, _]) => !key.startsWith("_"))
+      )
+    )
+  })
+  return games.filter((g) => g.id === id)[0]
+}
