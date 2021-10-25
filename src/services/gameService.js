@@ -69,7 +69,10 @@ export function createGame(name) {
   return game
 }
 
-export function takeGood(game) {
+export function takeGood(id) {
+  const game = databaseService.findGame()
+
+  
 
   return game
 }
