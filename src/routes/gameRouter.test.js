@@ -1,6 +1,7 @@
 import request from "supertest"
 import app from "../app"
 import lodash from "lodash"
+import fs from "fs"
 
 jest.mock("lodash")
 lodash.shuffle.mockImplementation((x) => x)
@@ -93,5 +94,12 @@ describe("Game router", () => {
   test("should not creat game if no name", async () => {
     const response = await request(app).post("/games").send({ name: "" })
     expect(response.statusCode).toBe(400)
+  })
+  test("should get all games", async () => {
+    let response = await await request(app).get("/games")
+    expect(response.body.length).toEqual(0)
+    fs.readFileSync.mockImplementation(() => `[{"id": 1}, {"id": 1}]`)
+    response = await await request(app).get("/games")
+    expect(response.body.length).toEqual(2)
   })
 })

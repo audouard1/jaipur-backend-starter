@@ -68,3 +68,16 @@ export function createGame(name) {
   databaseService.saveGame(game)
   return game
 }
+
+export function getAllGames() {
+  const games = databaseService.getGames()
+  const res = []
+  games.forEach((g) => {
+    res.push(
+      Object.fromEntries(
+        Object.entries(g).filter(([key, _]) => !key.startsWith("_"))
+      )
+    )
+  })
+  return games
+}

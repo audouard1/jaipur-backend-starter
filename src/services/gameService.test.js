@@ -92,4 +92,11 @@ describe("Game service", () => {
     expect(game._players[1].hand).toStrictEqual(["cloth"])
     expect(game._players[1].camelsCount).toBe(1)
   })
+  test("should return list off all games", () => {
+    gameService.createGame("test")
+    const len1 = gameService.getAllGames().length
+    gameService.createGame("test2")
+    const len2 = gameService.getAllGames().length
+    expect(len2).toBe(len1 + 1)
+  })
 })
