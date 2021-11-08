@@ -30,3 +30,15 @@ export function saveGame(game) {
   fs.writeFileSync(path.join(DATABASE_FILE), JSON.stringify(games))
   return games
 }
+
+export function deleteGame(id) {
+  let games = getGames()
+  games = games.filter((g) => g.id !== id)
+  console.log(games)
+  try {
+    fs.mkdirSync(path.dirname(DATABASE_FILE))
+  } catch (e) {
+    // Do nothing
+  }
+  fs.writeFileSync(path.join(DATABASE_FILE), JSON.stringify(games))
+}

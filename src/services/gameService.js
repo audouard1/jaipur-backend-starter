@@ -94,3 +94,12 @@ export function getGamesForId(id) {
   })
   return games.filter((g) => g.id === id)[0]
 }
+
+export function deleteGameForId(id) {
+  const game = getGamesForId(id)
+  if (game !== undefined) {
+    databaseService.deleteGame(id)
+  }
+
+  return game
+}
