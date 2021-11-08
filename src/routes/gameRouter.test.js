@@ -121,5 +121,10 @@ describe("Game router", () => {
     )
     const response = await request(app).get("/games/7")
     expect(response.statusCode).toEqual(404)
+  
+  test("Création de la route PUT /games/[id]/take-good", async () => {
+    const game = await request(app).post("/games").send({ name: "test" })
+    const response = await request(app).put("/games/"+game.body.id+"/take-good").set('playerIndex', '1').send({ sellPayload: { good: "diamonds", count: 1}})
+    expect(response.statusCode).toBe(200)
   })
 })

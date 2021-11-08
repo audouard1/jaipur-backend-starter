@@ -28,9 +28,14 @@ describe("Database service", () => {
   })
 
   test("should get all games", () => {
-    fs.readFileSync.mockImplementation(() => `[{"id": 1}, {"id": 1}]`)
+    fs.readFileSync.mockImplementation(() => `[{"id": 1}, {"id": 2}]`)
     const games = databaseService.getGames()
     expect(games.length).toBe(2)
     expect(games[0].id).toBe(1)
+  })
+  test("should find a game by id", () => {
+    fs.readFileSync.mockImplementation(() => `[{"id": 1}, {"id": 2}]`)
+    const game = databaseService.findGame('1')
+    expect(game.id).toBe(1)
   })
 })

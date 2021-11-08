@@ -94,3 +94,7 @@ export function getGamesForId(id) {
   })
   return games.filter((g) => g.id === id)[0]
 }
+export function takeGood(game) {
+
+  return game
+}
