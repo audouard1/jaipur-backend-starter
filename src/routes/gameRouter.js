@@ -25,22 +25,26 @@ router.get("/:id", function (req, res) {
   res.status(200).json(game)
 })
 
-router.put("/:id/take-good/", function(req, res) {
-  if (!req.body.takeGoodPayload){
+router.put("/:id/take-good/", function (req, res) {
+  if (!req.body.takeGoodPayload) {
     return res.status(400).send("Missing takeGoodPayload parameter")
   } else {
-    if (!req.body.takeGoodPayload.good){
+    if (!req.body.takeGoodPayload.good) {
       return res.status(400).send("Missing good parameter in takeGoodPayload")
     }
   }
-  if (!req.header('playerIndex')){
+  if (!req.header("playerIndex")) {
     return res.status(400).send("Missing playerIndex parameter")
   }
-  if (!req.params.id){
+  if (!req.params.id) {
     return res.status(400).send("Missing id parameter")
   }
-  
-  const game = gameService.takeGood(req.params.id, req.header('playerIndex'), req.body.takeGoodPayload.good)
+
+  const game = gameService.takeGood(
+    req.params.id,
+    req.header("playerIndex"),
+    req.body.takeGoodPayload.good
+  )
 
   return res.status(200).json(game)
 })

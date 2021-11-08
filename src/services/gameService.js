@@ -97,16 +97,19 @@ export function getGamesForId(id) {
 
 export function takeGood(id, playerIndex, good) {
   const game = databaseService.findGame(id)
-  if (playerIndex===game.currentPlayerIndex) {
-    if (game._players[playerIndex].hand.length < 7){
-        if (game.market.filter(g => g == good)[0] == good) {
-          // On retire l'item du marché
-          game.market.splice(game.market.findIndex((card) => card === good), 1)
-          console.log(game.market)
+  if (playerIndex === game.currentPlayerIndex) {
+    if (game._players[playerIndex].hand.length < 7) {
+      if (game.market.filter((g) => g === good)[0] === good) {
+        // On retire l'item du marché
+        game.market.splice(
+          game.market.findIndex((card) => card === good),
+          1
+        )
+        console.log(game.market)
 
-          // On ajoute l'item dans la main du joueur
-          game._players[playerIndex].hand.push(good)
-        }
+        // On ajoute l'item dans la main du joueur
+        game._players[playerIndex].hand.push(good)
+      }
     }
   }
 
