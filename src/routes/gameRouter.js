@@ -40,8 +40,7 @@ router.put("/:id/take-good/", function(req, res) {
     return res.status(400).send("Missing id parameter")
   }
   
-  const game = [{id: 1}]
-  //const game = gameService.takeGood(req.params.id, req.header('playerIndex'), req.body.takeGoodPayload.good)
+  const game = gameService.takeGood(req.params.id, req.header('playerIndex'), req.body.takeGoodPayload.good)
 
   return res.status(200).json(game)
 })

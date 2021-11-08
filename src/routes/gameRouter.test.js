@@ -124,68 +124,12 @@ describe("Game router", () => {
   })
 
   test("Création de la route PUT /games/[id]/take-good", async () => {
-    fs.readFileSync.mockImplementation(() => `[{
-        id: 1,
-        name: "test",
-        market: ["camel", "camel", "camel", "diamonds", "diamonds"],
-        _deck: [
-          "silver",
-          "silver",
-          "silver",
-          "silver",
-          "silver",
-          "silver",
-          "cloth",
-          "cloth",
-          "cloth",
-          "cloth",
-          "cloth",
-          "cloth",
-          "cloth",
-          "cloth",
-          "spice",
-          "spice",
-          "spice",
-          "spice",
-          "spice",
-          "spice",
-          "spice",
-          "spice",
-          "leather",
-          "leather",
-          "leather", "leather", "leather", "leather", "leather", "leather", "leather", "leather",
-          "camel", "camel", "camel", "camel", "camel", "camel", "camel", "camel",
-        ],
-        _players: [
-          {
-            hand: ["diamonds", "diamonds", "diamonds", "diamonds", "gold"],
-            camelsCount: 0,
-            score: 0,
-          },
-          {
-            hand: ["gold", "gold", "gold", "gold", "gold"],
-            camelsCount: 0,
-            score: 0,
-          },
-        ],
-        currentPlayerIndex: 0,
-        tokens: {
-          diamonds: [7, 7, 5, 5, 5],
-          gold: [6, 6, 5, 5, 5],
-          silver: [5, 5, 5, 5, 5],
-          cloth: [5, 3, 3, 2, 2, 1, 1],
-          spice: [5, 3, 3, 2, 2, 1, 1],
-          leather: [4, 3, 2, 1, 1, 1, 1, 1, 1],
-        },
-        _bonusTokens: {
-          3: [2, 1, 2, 3, 1, 2, 3],
-          4: [4, 6, 6, 4, 5, 5],
-          5: [8, 10, 9, 8, 10],
-        },
-        isDone: false,
-      })
-    }]`)
+    fs.readFileSync.mockImplementation(
+      () =>
+        `[{"id":1,"name":"dolore est","market":["camel","camel","camel","leather","cloth"],"_deck":["leather","spice","silver","diamonds","spice","silver","cloth","leather","spice","cloth","leather","silver","spice","leather","gold","camel","camel","gold","spice","diamonds","leather","camel","gold","gold","diamonds","spice","leather","camel","cloth","silver","spice","leather","camel","gold","gold","diamonds","silver","spice","cloth","diamonds"],"_players":[{"hand":["cloth","diamonds","cloth","silver","cloth"],"camelsCount":0,"score":0},{"hand":["leather","leather"],"camelsCount":3,"score":0}],"currentPlayerIndex":0,"tokens":{"diamonds":[7,7,5,5,5],"gold":[6,6,5,5,5],"silver":[5,5,5,5,5],"cloth":[5,3,3,2,2,1,1],"spice":[5,3,3,2,2,1,1],"leather":[4,3,2,1,1,1,1,1,1]},"_bonusTokens":{"3":[2,1,2,3,3,1,2],"4":[6,5,4,4,6,5],"5":[10,10,8,8,9]},"isDone":false}]`
+    )
     const response = await request(app).put("/games/1/take-good").set('playerIndex', '0').send({ takeGoodPayload: { good: "diamonds"}})
+    
     expect(response.statusCode).toBe(200)
   })
 

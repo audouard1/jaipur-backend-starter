@@ -95,24 +95,20 @@ export function getGamesForId(id) {
   return games.filter((g) => g.id === id)[0]
 }
 
-export function takeGood(id) {
-  const game = databaseService.findGame(id)
-
-  
-
-  return game
-}
-/*
 export function takeGood(id, playerIndex, good) {
   const game = databaseService.findGame(id)
-  console.log(game)
   if (playerIndex===game.currentPlayerIndex) {
-    if (game._players.hand.length <7){
+    if (game._players[playerIndex].hand.length < 7){
         if (game.market.filter(g => g == good)[0] == good) {
+          // On retire l'item du marché
+          game.market.splice(game.market.findIndex((card) => card === good), 1)
+          console.log(game.market)
+
+          // On ajoute l'item dans la main du joueur
+          game._players[playerIndex].hand.push(good)
         }
     }
   }
 
   return game
 }
-*/
