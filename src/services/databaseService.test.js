@@ -33,4 +33,10 @@ describe("Database service", () => {
     expect(games.length).toBe(2)
     expect(games[0].id).toBe(1)
   })
+  test("should delete a games", () => {
+    fs.readFileSync.mockImplementation(() => `[{"id": 1}, {"id": 2}]`)
+    const games = databaseService.deleteGame(1)
+    expect(games[0].id).toBe(2)
+    expect(games.length).toBe(1)
+  })
 })

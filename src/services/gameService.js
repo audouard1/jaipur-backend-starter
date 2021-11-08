@@ -94,3 +94,15 @@ export function getGamesForId(id) {
   })
   return games.filter((g) => g.id === id)[0]
 }
+
+export function deleteGameForId(id) {
+  let game = getGamesForId(id)
+  if (game !== undefined) {
+    databaseService.deleteGame(id)
+    game = Object.fromEntries(
+      Object.entries(game).filter(([key, _]) => !key.startsWith("_"))
+    )
+  }
+
+  return game
+}
