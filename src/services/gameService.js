@@ -94,7 +94,11 @@ export function getGamesForId(id) {
   })
   return games.filter((g) => g.id === id)[0]
 }
-export function takeGood(game) {
+
+export function takeGood(id) {
+  const game = databaseService.findGame(id)
+
+  
 
   return game
 }
