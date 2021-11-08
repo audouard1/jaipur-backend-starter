@@ -43,6 +43,6 @@ export function deleteGame(id) {
   return games
 }
 export function findGame(id) {
-  const game = getGames().filter( game => game.id==id)
+  const game = getGames().filter((game) => game.id === id)
   return game[0]
 }
