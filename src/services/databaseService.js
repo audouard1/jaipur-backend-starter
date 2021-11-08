@@ -42,3 +42,7 @@ export function deleteGame(id) {
   fs.writeFileSync(path.join(DATABASE_FILE), JSON.stringify(games))
   return games
 }
+export function findGame(id) {
+  const game = getGames().filter( game => game.id==id)
+  return game[0]
+}
