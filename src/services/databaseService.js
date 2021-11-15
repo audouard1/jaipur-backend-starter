@@ -34,6 +34,7 @@ export function saveGame(game) {
 export function deleteGame(id) {
   let games = getGames()
   games = games.filter((g) => g.id !== id)
+  console.log(games)
   try {
     fs.mkdirSync(path.dirname(DATABASE_FILE))
   } catch (e) {
